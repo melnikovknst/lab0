@@ -115,7 +115,7 @@ void convert(long double decNum, int b2) {
         printf(".");
     
     while (fractional && count < 12) {
-        if ((int)(fractional * b2) > 10)
+        if ((int)(fractional * b2) > 9)
             printf("%c", ((int)(fractional * b2)) - 10 + 'a');
         else
             printf("%d", (int)(fractional * b2));
