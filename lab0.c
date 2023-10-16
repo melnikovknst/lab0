@@ -22,7 +22,9 @@ int isCorrect (char *num, int b1) {
     for (int i = 0; i < (int)strlen(num); i++) {
         int digit = 0;
         
-        if (num[i] == '.')
+        if (num[i] == '.' && (i == 0 || i == (int)strlen(num) - 1))
+            return 0;
+        else if (num[i] == '.')
             count++;
         
         if ((!(tolower(num[i]) >= 'a' && tolower(num[i]) <= 'f') && !(tolower(num[i]) >= '0' && tolower(num[i]) <= '9')) && num[i] != '.')
@@ -92,24 +94,23 @@ void convert(long double decNum, int b2) {
     long long int integer = (long long int)decNum;
     int len = 0;
     int count = 0;
-    char resultInt[50];
+    char resultInt[50] = {"\0"};
     long double fractional = decNum - integer;
     
     if (!integer)
         printf("0");
     
-    // calculate the integer part of decNum
     while (integer) {
         if (integer % b2 > 9)
             resultInt[len++] = integer % b2 - 10 + 'a';
         else
             resultInt[len++] = integer % b2 + '0';
+        
         integer /= b2;
     }
     
     reverse(resultInt);
     
-    // calculate the fractional part of decNum
     if (fractional != 0)
         printf(".");
     
